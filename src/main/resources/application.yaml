@@ -1,0 +1,6 @@
+management:
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true

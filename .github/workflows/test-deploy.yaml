@@ -1,0 +1,21 @@
+name: Test and deploy
+
+on:
+  push:
+    branches:
+    - main
+    - testing
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  call-test-app:
+    if: always()
+    uses: ./.github/workflows/_test.yaml
+
+  call-deploy-image:
+    needs:
+    - call-test-app
+    uses: ./.github/workflows/_deploy.yaml
